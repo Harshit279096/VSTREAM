@@ -36,9 +36,18 @@ if (process.env.NODE_ENV === 'production') {
 // Connect to Database
 connectDB();
 
-// Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/videos', require('./routes/videoRoutes'));
+
+// Serve Frontend in Production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+    // Fallback for React Router
+    app.get('(.*)', (req, res) => {
+        res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+    });
+}
 
 // Socket.io connection
 io.on('connection', (socket) => {
