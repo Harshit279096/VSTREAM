@@ -2,7 +2,7 @@ services:
   - type: web
     name: vstream-app
     env: node
-    buildCommand: npm install && npm run postinstall
+    buildCommand: npm run build
     startCommand: npm start
     plan: free # Change to paid if using persistence
     envVars:
