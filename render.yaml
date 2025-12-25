@@ -17,11 +17,7 @@ services:
       - key: CORS_ORIGIN
         value: "*" # Update with your Render URL after first deploy
       - key: UPLOAD_DIR
-        value: /opt/render/project/src/backend/uploads
-    disk:
-      name: video-storage
-      mountPath: /opt/render/project/src/backend/uploads
-      sizeGB: 10
+        value: backend/uploads
 
 databases:
   - name: vstream-db
