@@ -20,18 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Serve Frontend in Production
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-    // Auth and Video routes are handled before this
-    // This catch-all serves index.html for React Router
-    app.get('*', (req, res) => {
-        if (!req.path.startsWith('/api')) {
-            res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-        }
-    });
-}
+// Production serving handled at the bottom of the file
 
 // Connect to Database
 connectDB();
